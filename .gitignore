@@ -6,3 +6,5 @@ pyvenv.cfg
 Scripts
 __pycache__
 Include
+pyvenv.cfg
+include
