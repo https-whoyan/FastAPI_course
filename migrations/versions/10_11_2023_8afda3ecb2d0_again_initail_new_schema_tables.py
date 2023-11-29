@@ -1,7 +1,7 @@
 """Again: Initail new schema Tables
 
 Revision ID: 8afda3ecb2d0
-Revises: 
+Revises:
 Create Date: 2023-11-03 23:50:54.974249
 
 """

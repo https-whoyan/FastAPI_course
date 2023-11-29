@@ -2,7 +2,8 @@ from typing import Optional
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin
 from fastapi_users import models, schemas, exceptions
-from auth.database import User, get_user_db
+from src.auth.utils import get_user_db
+from src.auth.models import User
 from config import JWT_SECRET_KEY
 
 SECRET = JWT_SECRET_KEY

@@ -1,4 +1,4 @@
-from auth.database import User
+from src.auth.models import User
 
 from fastapi import FastAPI, Depends
 from fastapi_users import FastAPIUsers
@@ -6,6 +6,8 @@ from fastapi_users import FastAPIUsers
 from auth.manager import get_user_manager
 from auth.auth import auth_backend
 from auth.schemas import UserRead, UserCreate
+
+from src.operations.router import router as router_operation
 
 app = FastAPI(
     title="My App"
@@ -28,12 +30,16 @@ app.include_router(
     tags=["auth"],
 )
 
+app.include_router(router_operation)
+
 current_user = fastapi_users.current_user()
+
 
 @app.get("/protected-route")
 def protected_route(user: User = Depends(current_user)):
     return f"Hello, {user.username}"
 
-@app.get("/upprotected-route")
+
+@app.get("/unprotected-route")
 def unprotected_route():
     return f"ZXC"
