@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi_cache.decorator import cache
 from sqlalchemy import select, insert
 from sqlalchemy.exc import DBAPIError, IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.database import get_async_session
 from src.operations.models import operation
 from src.operations.schema import OperationCreate
+import time
 
 router = APIRouter(
     prefix="/operations",
@@ -59,3 +61,10 @@ async def add_specific_operations(new_operation: OperationCreate, session: Async
             "data": "Произошла ошибка при добавлении финансой операции",
             "details": None,
         })
+
+
+@router.get("/long_calculation_request")
+@cache(expire=30)
+async def get_long_calculation_request():
+    time.sleep(2)
+    return "Какие то данные..."
