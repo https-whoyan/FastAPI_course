@@ -1,6 +1,6 @@
 from src.auth.models import User
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from fastapi_users import FastAPIUsers
 
 from auth.manager import get_user_manager
@@ -12,7 +12,9 @@ from fastapi_cache.backends.redis import RedisBackend
 
 from redis import asyncio as aioredis
 
+from src.test_endpoinds.router import router as test_endpoints_router
 from src.operations.router import router as router_operation
+from src.tasks.router import router as tasks_router
 
 app = FastAPI(
     title="My App"
@@ -36,18 +38,8 @@ app.include_router(
 )
 
 app.include_router(router_operation)
-
-current_user = fastapi_users.current_user()
-
-
-@app.get("/protected-route")
-def protected_route(user: User = Depends(current_user)):
-    return f"Hello, {user.username}"
-
-
-@app.get("/unprotected-route")
-def unprotected_route():
-    return f"ZXC"
+app.include_router(tasks_router)
+app.include_router(test_endpoints_router)
 
 
 @app.on_event("startup")

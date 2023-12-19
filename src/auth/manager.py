@@ -43,5 +43,5 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         return created_user
 
 
-async def get_user_manager(user_db=Depends(get_user_db)):
+async def get_user_manager(user_db: User = Depends(get_user_db)):
     yield UserManager(user_db)

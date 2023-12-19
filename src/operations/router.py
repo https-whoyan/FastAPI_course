@@ -10,7 +10,7 @@ import time
 
 router = APIRouter(
     prefix="/operations",
-    tags=["Operation"]
+    tags=["operation"]
 )
 
 
