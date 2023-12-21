@@ -32,10 +32,11 @@ async def get_specific_operations(operation_type: str, session: AsyncSession = D
         })
 
 
+
 @router.post("/")
 async def add_specific_operations(new_operation: OperationCreate, session: AsyncSession = Depends(get_async_session)):
     try:
-        stmt = insert(operation).values(**new_operation.model_dump())
+        stmt = insert(operation).values(dict(new_operation))
         await session.execute(stmt)
         await session.commit()
         return {
@@ -50,16 +51,17 @@ async def add_specific_operations(new_operation: OperationCreate, session: Async
                 "data": None,
                 "details": "Ты добавляешь айдишник, который уже есть в БД!",
             })
+        print(e.__class__.__name__)
         return HTTPException(status_code=500, detail={
             "status": "error",
             "data": None,
-            "details": "БД жалуется на данные!",
+            "details": "БД жалуется на данные. Попробуй что то изменить со временем",
         })
     except Exception as e:
         return HTTPException(status_code=500, detail={
             "status": "error",
             "data": "Произошла ошибка при добавлении финансой операции",
-            "details": None,
+            "details": str(e.__class__.__name__),
         })
 
 

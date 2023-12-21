@@ -9,6 +9,7 @@ import sys
 
 sys.path.append(os.path.join(sys.path[0], 'src'))
 
+
 from config import DB_HOST, DB_PORT, DB_USER, DB_NAME, DB_PASS
 
 from src.auth.models import metadata as auth_metadata
