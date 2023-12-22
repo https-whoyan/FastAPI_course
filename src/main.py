@@ -1,5 +1,6 @@
 from src.auth.models import User
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi_users import FastAPIUsers
 
@@ -16,8 +17,16 @@ from src.test_endpoinds.router import router as test_endpoints_router
 from src.operations.router import router as router_operation
 from src.tasks.router import router as tasks_router
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    redis = aioredis.from_url("redis://localhost")
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    yield
+
 app = FastAPI(
-    title="My App"
+    title="My App",
+    lifespan=lifespan
 )
 
 fastapi_users = FastAPIUsers[User, int](
@@ -40,9 +49,3 @@ app.include_router(
 app.include_router(router_operation)
 app.include_router(tasks_router)
 app.include_router(test_endpoints_router)
-
-
-@app.on_event("startup")
-async def startup():
-    redis = aioredis.from_url("redis://localhost")
-    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")

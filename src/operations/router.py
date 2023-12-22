@@ -24,11 +24,11 @@ async def get_specific_operations(operation_type: str, session: AsyncSession = D
             "data": result.mappings().all(),
             "details": None,
         }
-    except Exception:
+    except Exception as err:
         return HTTPException(status_code=500, detail={
             "status": "error",
             "data": "Произошла ошибка при получении данных об финансовых операциях",
-            "details": None,
+            "details": err.__class__.__name__,
         })
 
 
