@@ -4,9 +4,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi_users import FastAPIUsers
 
-from auth.manager import get_user_manager
-from auth.auth import auth_backend
-from auth.schemas import UserRead, UserCreate
+from src.auth.manager import get_user_manager
+from src.auth.auth import auth_backend
+from src.auth.schemas import UserRead, UserCreate
 
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
@@ -49,3 +49,22 @@ app.include_router(
 app.include_router(router_operation)
 app.include_router(tasks_router)
 app.include_router(test_endpoints_router)
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PATCH", "PUT"],
+    allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers",
+                   "Access-Control-Allow-Origin", "Authorization"],
+)
