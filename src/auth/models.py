@@ -1,5 +1,5 @@
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
-from sqlalchemy import MetaData,  Table, Integer, String, TIMESTAMP, ForeignKey, Column, JSON, Boolean
+from sqlalchemy import Table, Integer, String, TIMESTAMP, ForeignKey, Column, JSON, Boolean, MetaData
 from datetime import datetime
 from src.database import Base
 
@@ -12,6 +12,7 @@ role = Table(
     Column("name", String, nullable=False),
     Column("permissions", JSON),
 )
+
 
 user = Table(
     "user",

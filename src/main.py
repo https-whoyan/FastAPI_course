@@ -14,7 +14,8 @@ from fastapi_cache.backends.redis import RedisBackend
 
 from redis import asyncio as aioredis
 
-from src.pages.router import rounter as pages_router
+from src.pages.router import router as pages_router
+from src.chat.router import router as chat_router
 from src.test_endpoinds.router import router as test_endpoints_router
 from src.operations.router import router as router_operation
 from src.tasks.router import router as tasks_router
@@ -55,12 +56,16 @@ app.include_router(router_operation)
 app.include_router(tasks_router)
 app.include_router(test_endpoints_router)
 app.include_router(pages_router)
+app.include_router(chat_router)
+
 
 app.mount("/src/static", StaticFiles(directory="src/static"), name="static")
 
 origins = [
     "http://localhost:3000",
-    "http://localhost:8080",
+    "http://localhost:8000",
+    "http://127.0.0.1:8080",
+    "http://127.0.0.1:8000",
 ]
 
 app.add_middleware(

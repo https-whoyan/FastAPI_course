@@ -13,6 +13,7 @@ sys.path.append(os.path.join(sys.path[0], 'src'))
 from config import DB_HOST, DB_PORT, DB_USER, DB_NAME, DB_PASS
 
 from src.auth.models import metadata as auth_metadata
+from src.chat.models import metadata as chat_metadata
 from src.operations.models import metadata as operations_metadata
 
 # this is the Alembic Config object, which provides
@@ -35,7 +36,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = [auth_metadata, operations_metadata]
+target_metadata = [auth_metadata, chat_metadata, operations_metadata]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

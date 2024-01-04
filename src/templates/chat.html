@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Чат через WebSocket'ы</h1>
+<h2>Чат ID: <span id="ws-id"></span></h2>
+<form action="" onsubmit="sendMessage(event)">
+    <input type="text" id="messageText" autocomplete="off"/>
+    <button>Send</button>
+</form>
+<ul id='messages'> </ul>
+<script>
+
+    async function getLastMessages() {
+        const url = "http://localhost:8000/chat/get_last_messages"
+        const responce = await fetch(url, {
+            method: 'GET'
+        })
+        return responce.json()
+    }
+
+    getLastMessages()
+        .then(messages => {
+            appendMessage("Предудущие 5 сообщений:")
+            messages.forEach(msg => {
+                appendMessage(msg.message)
+            })
+            appendMessage("\nНовые сообщения ;)")
+        })
+
+
+    function appendMessage(user_message) {
+        let messages = document.getElementById('messages')
+        let message = document.createElement('li')
+        let content = document.createTextNode(user_message)
+        message.appendChild(content)
+        messages.appendChild(message)
+    }
+
+    let client_id = Date.now()
+    document.querySelector("#ws-id").textContent = client_id;
+    let ws = new WebSocket(`ws://localhost:8000/chat/ws/${client_id}`);
+    ws.onmessage = function(event) {
+        appendMessage(event.data)
+    };
+    function sendMessage(event) {
+        let input = document.getElementById("messageText")
+        ws.send(input.value)
+        input.value = ''
+        event.preventDefault()
+    }
+</script>
+{% endblock %}
