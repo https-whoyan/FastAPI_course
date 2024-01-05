@@ -1,3 +1,4 @@
+#DB and Alembic message structures
 from sqlalchemy import Table, Column, Integer, String, MetaData
 from pydantic import BaseModel
 

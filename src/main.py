@@ -23,18 +23,20 @@ from src.tasks.router import router as tasks_router
 from fastapi.staticfiles import StaticFiles
 
 
+#start Redis before app start
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     redis = aioredis.from_url("redis://localhost")
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
     yield
 
-
+#app initial
 app = FastAPI(
     title="My App",
     lifespan=lifespan
 )
 
+# Connect Auth System
 fastapi_users = FastAPIUsers[User, int](
     get_user_manager,
     [auth_backend],
@@ -52,6 +54,7 @@ app.include_router(
     tags=["auth"],
 )
 
+# Include all routers
 app.include_router(router_operation)
 app.include_router(tasks_router)
 app.include_router(test_endpoints_router)
@@ -59,12 +62,15 @@ app.include_router(pages_router)
 app.include_router(chat_router)
 
 
+# Configure static files dir
 app.mount("/src/static", StaticFiles(directory="src/static"), name="static")
 
+
+# Configure middleware
 origins = [
     "http://localhost:3000",
+    "http://127.0.0.1:3000",
     "http://localhost:8000",
-    "http://127.0.0.1:8080",
     "http://127.0.0.1:8000",
 ]
 

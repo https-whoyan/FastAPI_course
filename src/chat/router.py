@@ -19,6 +19,7 @@ router = APIRouter(
 manager = ConnectionManager()
 
 
+#endpoint to return last 5 message from db 'messages' table
 @router.get(path="/get_last_messages")
 async def get_last_messages(
         session: AsyncSession = Depends(get_async_session),

@@ -12,6 +12,7 @@ SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 465
 
 
+# Email create
 def get_email_template_dashboard(username: str, username_email: str):
     email = EmailMessage()
     email['Subject'] = "FastAPI Course Отчет"
@@ -23,6 +24,7 @@ def get_email_template_dashboard(username: str, username_email: str):
     return email
 
 
+# Email send
 @celery_var.task
 def send_email_report_dashboard(username: str, username_email: str):
     email = get_email_template_dashboard(username, username_email)

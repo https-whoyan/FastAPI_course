@@ -9,6 +9,7 @@ router = APIRouter(
 )
 
 
+# Add BackGroud Task
 @router.get("/dashboard")
 def get_dashboard_report(background_taks: BackgroundTasks, user: User = Depends(current_user)):
     background_taks.add_task(send_email_report_dashboard, user.username, user.email)

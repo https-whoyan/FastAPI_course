@@ -1,0 +1,1 @@
+<h3> Auth Protected/Not Protectected endpoinds </h3>

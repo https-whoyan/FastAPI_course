@@ -2,6 +2,7 @@ from datetime import datetime
 from pydantic import BaseModel
 
 
+# Operation Schema
 class OperationCreate(BaseModel):
     id: int
     quantity: str

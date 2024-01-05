@@ -14,6 +14,7 @@ router = APIRouter(
 )
 
 
+#An endpoint that returns all operations whose type is equal to the type entered by the user
 @router.get("/")
 async def get_specific_operations(operation_type: str, session: AsyncSession = Depends(get_async_session)):
     try:
@@ -33,6 +34,7 @@ async def get_specific_operations(operation_type: str, session: AsyncSession = D
 
 
 
+# Add operation. Work with db
 @router.post("/")
 async def add_specific_operations(new_operation: OperationCreate, session: AsyncSession = Depends(get_async_session)):
     try:
@@ -65,6 +67,7 @@ async def add_specific_operations(new_operation: OperationCreate, session: Async
         })
 
 
+# Redis usage (@cache)
 @router.get("/long_calculation_request")
 @cache(expire=30)
 async def get_long_calculation_request():

@@ -4,6 +4,7 @@ from src.database import async_session_maker
 from src.chat.models import messages
 
 
+# Manager logic to connect/disconnect and add to db messages
 class ConnectionManager:
     def __init__(self):
         self.active_connections: list[WebSocket] = []
