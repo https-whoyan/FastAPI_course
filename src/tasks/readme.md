@@ -4,5 +4,5 @@
 <text> Main router in router.py. </text> <br>
 <text> Working with <b>Celery, BackGroundTasks, Email lib.</b> </text> <br> <hr>
 <text> <b> Example: </b> </text> <br>
-<img src="email_send.png"> 
-<img src="email_arrived.png"> 
+<img src="../../.github/tasks/email_send.png"> 
+<img src="../../.github/tasks/email_arrived.png"> 

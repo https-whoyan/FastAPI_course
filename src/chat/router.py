@@ -11,8 +11,8 @@ from src.chat.utils import validate_to_dict
 
 
 router = APIRouter(
-    prefix="/chat",
-    tags=["chat"]
+    prefix="/pages",
+    tags=["pages"]
 )
 
 
