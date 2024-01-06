@@ -9,10 +9,9 @@ from sqlalchemy import select
 from src.chat.utils import validate_to_dict
 
 
-
 router = APIRouter(
-    prefix="/pages",
-    tags=["pages"]
+    prefix="/chat",
+    tags=["chat"]
 )
 
 
@@ -33,6 +32,7 @@ async def get_last_messages(
 
 @router.websocket("/ws/{client_id}")
 async def websocket_endpoint(websocket: WebSocket, client_id: int):
+    print("aksjas")
     await manager.connect(websocket)
     try:
         while True:

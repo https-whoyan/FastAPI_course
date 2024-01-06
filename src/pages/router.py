@@ -27,3 +27,8 @@ def get_base_page(request: Request, operations=Depends(get_specific_operations))
 @router.get("/pages")
 def chat_app(request: Request):
     return templates.TemplateResponse("pages.html", {"request": request})
+
+
+@router.get("/chat")
+def chat_app(request: Request):
+    return templates.TemplateResponse("chat.html", {"request": request})
