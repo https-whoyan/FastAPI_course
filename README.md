@@ -8,9 +8,9 @@ Link of the course:
 click</a> 
 <hr>
 <text> <b> There are FastAPI App. </b> </text> <br>
-<text> <b>  The main technologies used to build the application: </text> </b> <br> 
-<a href="https://fastapi.tiangolo.com/"> FastAPI</a> main Framework<br> <b>
-<a href="https://fastapi-users.github.io/fastapi-users/12.1/"> FastAPIUsers</a> </b>
+<text> <b>  The main technologies used to build the application:</b> </text> <br> 
+<a href="https://fastapi.tiangolo.com/"> <b>FastAPI </b></a>: main Framework<br>
+<b> <a href="https://fastapi-users.github.io/fastapi-users/12.1/"> FastAPIUsers</a> </b>
 <text>: for Authentication. Use JWT and Cookie technologies</text> <br>
 <b> <a href="https://github.com/long2ice/fastapi-cache"> FastAPICache</a> </b> 
 <text>: A utility that helps you cache data. Works in conjunction with Redis </text> <br>
@@ -46,7 +46,7 @@ knew at the time I finished this repository.
 <h3> My Contacts </h3>
 <b><font size="3"> Telegram: </font>
 <a href="https://t.me/https_whoyan">
-<img src="https://www.svgrepo.com/show/521874/telegram.svg" width="20">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="18">
 </a> <br>
 <font size="3"> Gmail: </font>
 <a href="mailto:yaniknezhin@gmail.com">
